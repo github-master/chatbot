@@ -30,16 +30,17 @@ app.post('/webhook', function(req, res) {
 
 	//let messaging_event = req.body.entry[0].messaging;
 	let messaging_events = req.body.messaging;
-
+	var text = ""
 	for(let i = 0; i < messaging_events.length; i++) {
 		let event = messaging_events[i];
 		let sender = event.id;
 		if(event.text) {
-			let text = event.text;
+			text = event.text;
 			sendText(sender, "text echo: " + text.substring(0, 100));
 		}
 	}
-	res.sendStatus(200);
+	res.status(200).send("text echo: " + text.substring(0, 100))
+	//res.sendStatus(200);
 })
 function sendText(senderId, text) {
 	let messageData = {text: text};
