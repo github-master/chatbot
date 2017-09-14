@@ -33,22 +33,22 @@ app.post('/webhook', function(req, res) {
 
 	for(let i = 0; i < messaging_events.length; i++) {
 		let event = messaging_events[i];
-		let sender = event.sender.id;
-		if(event.message && event.message.text) {
-			let text = event.message.text;
+		let sender = event.id;
+		if(event.text) {
+			let text = event.text;
 			sendText(sender, "text echo: " + text.substring(0, 100));
 		}
 	}
 	res.sendStatus(200);
 })
-function sendText(sender, text) {
+function sendText(senderId, text) {
 	let messageData = {text: text};
 	request({
 		url: "http://graph.facebook.com/v2.6/me/messages",
 		qs: {access_token: token},
 		method: "POST", 
 		json: {
-			recipient: {id: sender.id},
+			recipient: {id: senderId},
 			message: messageData
 		}
 	}, function(error, response, body) {
