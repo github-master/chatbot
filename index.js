@@ -38,7 +38,9 @@ app.post('/webhook', function(req, res) {
 			text = event.text;
 			sendText(sender, "text echo: " + text.substring(0, 100));
 		}
+		console.log("res body" + "text echo: " + text);
 	}
+	console.log("res body" + "text echo: " + text);
 	res.status(200).send("text echo: " + text.substring(0, 100))
 	//res.sendStatus(200);
 })
