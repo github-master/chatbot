@@ -33,7 +33,7 @@ app.post('/webhook', function(req, res) {
 	var text = ""
 	for(let i = 0; i < messaging_events.length; i++) {
 		let entry = messaging_events[i];
-		event = JSON.parse(entry);
+		let event = JSON.parse(entry);
 		console.log("request body" + JSON.stringify(event.text));
 		let sender = event.id;
 		if(event.text) {
